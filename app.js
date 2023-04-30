@@ -32,6 +32,13 @@ app.get("/compose", function (req, res) {
 });
 
 
+app.post("/compose", function (req, res) {
+    newBlog = req.body.newBlog;
+    console.log(newBlog);
+    res.redirect("compose");
+});
+
+
 app.listen(3000, function() {
     console.log("server running on port 3000");
 });
