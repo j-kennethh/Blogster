@@ -54,10 +54,8 @@ app.get("/posts/:postTitle", function (req, res) {
     reqTitle = _.lowerCase(req.params.postTitle);
 
     if (postTitles.includes(reqTitle)) {
-        console.log("match found");
-    }
-    else {
-        console.log("match not found");
+        const id = postTitles.findIndex(postTitles => postTitles.includes(reqTitle));
+        res.render("post", {title: posts[id].title, body: posts[id].body});
     }
 });
 
