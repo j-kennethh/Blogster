@@ -59,18 +59,12 @@ app.post("/compose", function (req, res) {
 });
 
 
-app.get("/posts/:postTitle", function (req, res) {
-    const postTitles = [];
-    posts.forEach(function (post) {
-        postTitles.push(_.lowerCase(post.title));
+app.get("/posts/:postId", function (req, res) {
+    const reqPostId = req.params.postId;
+
+    Post.findOne({_id: reqPostId}).then((post) => {
+        res.render("post", {title: post.title, content: post.content});
     });
-
-    reqTitle = _.lowerCase(req.params.postTitle);
-
-    if (postTitles.includes(reqTitle)) {
-        const id = postTitles.findIndex(postTitles => postTitles.includes(reqTitle));
-        res.render("post", {title: posts[id].title, body: posts[id].body});
-    }
 });
 
 
